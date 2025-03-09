@@ -1,0 +1,12 @@
+# Project Description
+
+1. dynamic schedule display
+
+2. add event message that want to be displayed and add Data expries the message automatically,
+or add a checkbox that can be deleted in the dashboard manually.
+
+3. Add priority section that the dashboard will display the event based on the priority.
+It have 1, 2, 3 level of priority 1 means the most important. Each with a different color of background showing 
+in the dashboard
+
+4.
