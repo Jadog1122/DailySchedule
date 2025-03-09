@@ -1,0 +1,24 @@
+<form method="POST">
+    <input name="event" placeholder="Add Events">
+    <input name="expire" placeholder="what time will be end">
+    <input name="priority" placeholder="What level of priority">
+    <input type="submit">
+</form>
+
+    {{#each ds}}
+        <div>
+            <h2>{{event}}</h2>
+            <p>expired at: {{expire}}</p>
+            <h3>Priority: {{priority}}</h3>
+
+            {{#if completed}}
+                <p>Completed</p>
+            {{else}}
+                <form action="/complete/{{_id}}" method="POST">
+                    <button type="sumbit">Mark As Complete</button>
+                </form>
+            {{/if}}
+        </div>
+    {{/each}}
+
+<h1>Halo</h1>
