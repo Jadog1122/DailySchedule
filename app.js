@@ -2,11 +2,20 @@ import express from 'express'
 // import session from 'express-session' 
 import './db.js' //ES module must include the extension.
 import schedule from './db.js'
+import path from 'path'
+import hbs from 'hbs'
+// import 'bootstrap/dist/css/bootstrap.min.css' Es module doesnt support css
+
+
 
 const app = express()
+hbs.registerHelper('eq', (a,b) => {
+    return a===b
+})
 app.set('view engine', 'hbs')
-
+app.use('/bootstrap', express.static(path.join(process.cwd(), 'node_modules/bootstrap/dist')))
 app.use(express.urlencoded({extended:false}))
+
 
 app.get('/', (req, res) => {
     //Usage without async and await

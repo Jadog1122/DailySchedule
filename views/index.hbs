@@ -1,24 +1,75 @@
-<form method="POST">
-    <input name="event" placeholder="Add Events">
-    <input name="expire" placeholder="what time will be end">
-    <input name="priority" placeholder="What level of priority">
-    <input type="submit">
-</form>
+<div class="d-flex flex-column justify-content-center align-items-center vh-100" style="width=100%">
+    
+    <!-- Add New Event Form -->
+    <div class="card shadow-lg p-4 rounded mb-4 " style="width: 300px; background-color: #B4B19A;">
+        <h3 class="text-center text- mb-4">
+            <i class="bi bi-calendar-plus"></i> Add New Event
+        </h3>
 
-    {{#each ds}}
-        <div>
-            <h2>{{event}}</h2>
-            <p>expired at: {{expire}}</p>
-            <h3>Priority: {{priority}}</h3>
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label d-flex align-items-center">
+                    <i class="bi bi-pencil me-2"></i> Event Name
+                </label>
+                <input name="event" class="form-control" placeholder="Enter event name" required>
+            </div>
 
-            {{#if completed}}
-                <p>Completed</p>
-            {{else}}
-                <form action="/complete/{{_id}}" method="POST">
-                    <button type="sumbit">Mark As Complete</button>
-                </form>
-            {{/if}}
+            <div class="mb-3">
+                <label class="form-label d-flex align-items-center">
+                    <i class="bi bi-clock me-2"></i> Expire Time
+                </label>
+                <input name="expire" class="form-control" placeholder="Enter event time" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label d-flex align-items-center">
+                    <i class="bi bi-list-stars me-2"></i> Priority
+                </label>
+                <select name="priority" class="form-select">
+                    <option value="1">🔥 High (Red)</option>
+                    <option value="2">⚡ Mid (Yellow)</option>
+                    <option value="3">🌱 Low (Green)</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-secondary w-100 btn-lg shadow-sm">
+                <i class="bi bi-check-circle me-2"></i> Add Event
+            </button>
+        </form>
+    </div>
+
+    <!-- Scheduled Events List -->
+    <div class="container">
+        <h2 class="text-center mb-3 text-white">Scheduled Events</h2>
+
+        <div class="row justify-content-center">
+            {{#each ds}}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card shadow-lg mb-3 text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">{{event}}</h5>
+                            <p class="card-text"><i class="bi bi-clock"></i> Expired at: {{expire}}</p>
+
+                            <p class="card-text">
+                                <span class="badge 
+                                    {{#if (eq priority 1)}}bg-danger{{else if (eq priority 2)}}bg-warning text-dark{{else}}bg-success{{/if}}">
+                                    {{#if (eq priority 1)}}🔥 High{{else if (eq priority 2)}}⚡ Medium{{else}}🌱 Low{{/if}} Priority
+                                </span>
+                            </p>
+
+                            {{#if completed}}
+                                <p class="text-success fw-bold"><i class="bi bi-check-circle"></i> Completed</p>
+                            {{else}}
+                                <form action="/complete/{{_id}}" method="POST" class="d-inline">
+                                    <button type="submit" class="btn btn-success btn-sm">
+                                        <i class="bi bi-check2-circle"></i> Mark As Complete
+                                    </button>
+                                </form>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
         </div>
-    {{/each}}
-
-<h1>Halo</h1>
+    </div>
+</div>
